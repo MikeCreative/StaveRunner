@@ -2,7 +2,9 @@ package com.Howesthatapp.com;
 
 import com.Howesthatapp.com.Screens.GameScreen;
 import com.Howesthatapp.com.Screens.MainMenu;
+import com.Howesthatapp.com.Tools.SoundGenerator;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Sound;
 
 public class GameClass extends Game {
 
@@ -12,6 +14,14 @@ public class GameClass extends Game {
 //        super();
 //        MyGdxGame.googleServices = googleServices;
 //    }
+
+    public static SoundGenerator soundGenerator;
+
+    public GameClass(SoundGenerator generator){
+        super();
+        soundGenerator = generator;
+
+    }
 
     @Override
     public void create() {

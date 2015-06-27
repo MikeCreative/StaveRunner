@@ -1,5 +1,6 @@
 package com.Howesthatapp.com.Tools;
 
+import com.Howesthatapp.com.GameSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -34,10 +35,35 @@ public class lineAnimation {
 
     }
 
+    // Settings
+    private static float height = 20;
+    private static int number = 5;
+
+    // Update Frame
+    private static float nextFrame = GameSettings.xScreenSize/2;
+    private static float current = -GameSettings.xScreenSize/2;
+    private static int frameNumber = 0;
+
     public static void renderLineAnimation(SpriteBatch batch){
-      stateTime += Gdx.graphics.getDeltaTime();
-      TextureRegion currentFrame = lineanimation.getKeyFrame(stateTime, true);
-      batch.draw(currentFrame, -Gdx.graphics.getWidth()/2, 0, Gdx.graphics.getWidth(), 25);
+        stateTime += Gdx.graphics.getDeltaTime();
+        TextureRegion currentFrame = lineanimation.getKeyFrame(stateTime, true);
+        // This frame
+        for (int i = 0; i < number; i++){
+            batch.draw(currentFrame, current + frameNumber*GameSettings.xScreenSize, GameSettings.heights[i], GameSettings.xScreenSize, height);
+        }
+
+        // Next Frame
+        for (int i = 0; i < number; i++){
+            batch.draw(currentFrame, nextFrame + frameNumber*GameSettings.xScreenSize, GameSettings.heights[i], GameSettings.xScreenSize, height);
+        }
+
+
+        if (GameSettings.xPosition > ((frameNumber + 1)*GameSettings.xScreenSize)){
+            frameNumber++;
+        }
+
+        // TODO: Repeating Frames - When frame is out of view, then remove and place before view
+
 
     }
 

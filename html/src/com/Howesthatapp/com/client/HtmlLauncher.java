@@ -1,5 +1,6 @@
 package com.Howesthatapp.com.client;
 
+import com.Howesthatapp.com.Tools.SoundGenerator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
@@ -14,6 +15,16 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new GameClass();
+                return new GameClass(new SoundGenerator() {
+                    @Override
+                    public void Generate() {
+
+                    }
+
+                    @Override
+                    public void changeFreq(float freq) {
+
+                    }
+                });
         }
 }
