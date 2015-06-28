@@ -1,9 +1,6 @@
 package com.Howesthatapp.com;
 
-import com.Howesthatapp.com.Screens.GameScreen;
 import com.Howesthatapp.com.Tools.Ripple;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
@@ -21,13 +18,6 @@ public class CustomGestureDetector implements GestureDetector.GestureListener {
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
         System.out.println("down");
-        // Working Example
-//        GameScreen.x = - ( x - Gdx.graphics.getWidth()/2);
-//        GameScreen.y = y  - (Gdx.graphics.getHeight())/2;
-//        System.out.println("x " + GameScreen.x + " y " + GameScreen.y);
-//        GameScreen.x_offset = GameScreen.getCamera().position.x;
-//        GameScreen.y_offset = GameScreen.getCamera().position.y;
-//        GameScreen.start = System.nanoTime();
         return false;
     }
 
@@ -62,22 +52,24 @@ public class CustomGestureDetector implements GestureDetector.GestureListener {
      */
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-//        System.out.println("fling " + velocityY);
-        // TODO, Stop if X is bigger
-        if(velocityY > 0){
-            System.out.println("direction = down");
-            if (GameSettings.noteindex > 0) {
-                GameSettings.noteindex--;
+        if (Math.abs(velocityY) > Math.abs(velocityX)) {
+            int previousValue = GameSettings.noteindex;
+            if (velocityY > 0) {
+                System.out.println("direction = down");
+                if (GameSettings.noteindex > 0) {
+                    GameSettings.noteindex--;
+                }
+            } else if (velocityY < 0) {
+                System.out.println("direction = up");
+                if (GameSettings.noteindex < 8) {
+                    GameSettings.noteindex++;
+                }
             }
-        }else if (velocityY < 0){
-            System.out.println("direction = up");
-            if (GameSettings.noteindex < 8) {
-                GameSettings.noteindex++;
-            }
-        }
 
-        // Create Ripple
-        Ripple.updateRipple();
+            // Move Character
+            MusicCharacter.updateCharacterPosition(previousValue, GameSettings.noteindex);
+//            Ripple.updateRipple();
+        }
         return true;
     }
 

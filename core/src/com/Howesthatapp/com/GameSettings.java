@@ -25,5 +25,8 @@ public class GameSettings {
     public static int noteindex = 2;
 
 
+    public static float baseTemp = 60.0f;
+
+
 
 }

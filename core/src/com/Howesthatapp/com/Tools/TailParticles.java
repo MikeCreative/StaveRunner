@@ -1,6 +1,7 @@
 package com.Howesthatapp.com.Tools;
 
 import com.Howesthatapp.com.GameSettings;
+import com.Howesthatapp.com.MusicCharacter;
 import com.Howesthatapp.com.Screens.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -37,7 +38,7 @@ public class TailParticles {
     public static void renderEffect(float delta, SpriteBatch batch){
 
         for (int i = 0; i < emitters.size; i++){
-            emitters.get(i).setPosition(GameScreen.getCamera().position.x + 150, GameSettings.notes[GameSettings.noteindex]);
+            emitters.get(i).setPosition(MusicCharacter.getSprite().getX() + 150, MusicCharacter.getSprite().getY() + GameSettings.yCharacterOffset);
             emitters.get(i).draw(batch, delta);
             if (emitters.get(i).isComplete()){
                 emitters.removeValue(emitters.get(i), true);
